@@ -1,0 +1,11 @@
+---
+- name: Exercise 28 - CPU Facts
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Show CPU info
+      debug:
+        msg: |
+          CPU cores: {{ ansible_processor_vcpus }}
+          Architecture: {{ ansible_architecture }}

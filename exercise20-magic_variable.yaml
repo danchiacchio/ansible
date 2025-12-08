@@ -1,0 +1,13 @@
+---
+- name: Magic Variables - hostvars
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Show my site variable
+      ansible.builtin.debug:
+        msg: "I am {{ inventory_hostname }} and my site is {{ hostvars[inventory_hostname].site }}"
+
+    - name: Show node1's site (from any host)
+      ansible.builtin.debug:
+        msg: "Node1 site is: {{ hostvars['node1'].site }}"

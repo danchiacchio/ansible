@@ -1,0 +1,16 @@
+---
+- name: Exercise 14 - Dictionary loop
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    ports:
+      ssh: 22
+      http: 80
+      https: 443
+
+  tasks:
+    - name: Show each key and value
+      ansible.builtin.debug:
+        msg: "Service {{ item.key }} uses port {{ item.value }}"
+      loop: "{{ ports | dict2items }}"

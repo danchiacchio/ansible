@@ -1,0 +1,16 @@
+---
+- name: Exercise 24 - Detect if a file changed
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Add a line to a file
+      ansible.builtin.lineinfile:
+        path: /tmp/example.txt
+        line: "Hello world"
+        create: true
+      register: edit_result
+
+    - name: Show change status
+      ansible.builtin.debug:
+        msg: "Changed? {{ edit_result.changed }}"

@@ -1,0 +1,17 @@
+---
+- name: Exercise 38 - Create files using a dictionary loop
+  hosts: all
+  become: yes
+
+  vars:
+    files_to_create:
+      file1.txt: "This is file 1"
+      file2.txt: "This is file 2"
+      file3.txt: "This is file 3"
+
+  tasks:
+    - name: Create files with different content
+      copy:
+        dest: "/tmp/{{ item.key }}"
+        content: "{{ item.value }}"
+      loop: "{{ files_to_create | dict2items }}"

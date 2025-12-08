@@ -1,0 +1,10 @@
+---
+- name: Exercise 34 - Check memory
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Show warning if free memory < 1GB
+      debug:
+        msg: "WARNING: System has less than 1GB free memory!"
+      when: ansible_facts.memfree_mb < 1024

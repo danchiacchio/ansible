@@ -1,0 +1,19 @@
+---
+- name: Jinja2 Exercise 43 - Variables
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    hostname: web01
+    admin: Thor
+
+  tasks:
+    - name: Ensure output dir exists
+      ansible.builtin.file:
+        path: /tmp/jinja_exercises
+        state: directory
+
+    - name: Render welcome template
+      ansible.builtin.template:
+        src: templates/welcome.j2
+        dest: /tmp/jinja_exercises/ex1_output.txt

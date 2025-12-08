@@ -1,0 +1,15 @@
+---
+- name: Exercise 30 - OS Detection
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: RedHat family message
+      debug:
+        msg: "This is a RedHat-based system"
+      when: ansible_os_family == "RedHat"
+
+    - name: Debian family message
+      debug:
+        msg: "This is a Debian-based system"
+      when: ansible_os_family == "Debian"

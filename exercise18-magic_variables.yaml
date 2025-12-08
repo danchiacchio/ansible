@@ -1,0 +1,11 @@
+---
+- name: Magic Variables - inventory_hostname and ansible_play_batch
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Show hostname and batch
+      ansible.builtin.debug:
+        msg: |
+          This host: {{ inventory_hostname }}
+          Hosts in this batch: {{ ansible_play_batch }}

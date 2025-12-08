@@ -1,0 +1,22 @@
+---
+- name: Exercise 41 - Testing Ansible Handlers
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install git
+      ansible.builtin.package:
+        name: git
+        state: present
+      notify: Run custom script
+
+  handlers:
+    - name: Run custom script
+      ansible.builtin.script: custom-script.sh
+      notify: Log script run
+
+    - name: Log script run
+      ansible.builtin.lineinfile:
+        path: /var/log/custom_script.log
+        line: "Script executed on {{ ansible_date_time.date }} at {{ ansible_date_time.time }}"
+        create: true

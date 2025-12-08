@@ -1,0 +1,15 @@
+---
+- name: Working with magic variables in Ansible
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Show magic variables
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          Short name: {{ inventory_hostname_short }}
+          Belongs to groups: {{ group_names }}
+          Ansible version: {{ ansible_version.full }}
+          Connection type: {{ ansible_connection }}
+          Inventory file: {{ inventory_file }}

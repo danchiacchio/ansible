@@ -1,0 +1,18 @@
+---
+- name: Variable Precedence - Task Vars
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    color: "blue"
+
+  tasks:
+    - name: Show color using playbook variable
+      ansible.builtin.debug:
+        msg: "Color is {{ color }}"
+
+    - name: Show color overridden by task-level var
+      vars:
+        color: "red"
+      ansible.builtin.debug:
+        msg: "Color is {{ color }}"

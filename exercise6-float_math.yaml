@@ -1,0 +1,13 @@
+---
+- name: Exercise 6 - Float math
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    price: 19.99
+    tax: 1.50
+
+  tasks:
+    - name: Show float math result
+      ansible.builtin.debug:
+        msg: "Total price: {{ price + tax }}"

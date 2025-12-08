@@ -1,0 +1,16 @@
+---
+- name: Exercise 10 - Test null behavior
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    my_value: null
+
+  tasks:
+    - name: Show raw variable
+      ansible.builtin.debug:
+        var: my_value
+
+    - name: Show default filter result (correct behavior for null)
+      ansible.builtin.debug:
+        msg: "Value: {{ my_value | default('DEFAULT VALUE', true) }}"

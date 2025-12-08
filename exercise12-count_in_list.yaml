@@ -1,0 +1,16 @@
+---
+- name: Exercise 12 - List count
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    servers:
+      - web01
+      - web02
+      - db01
+      - cache01
+
+  tasks:
+    - name: Show length
+      ansible.builtin.debug:
+        msg: "We have {{ servers | length }} servers."

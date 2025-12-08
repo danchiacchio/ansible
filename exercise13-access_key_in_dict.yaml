@@ -1,0 +1,18 @@
+---
+- name: Exercise 13 - Dictionary variables
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    user_info:
+      name: "Thor"
+      role: "IT Admin"
+      id: 101
+
+  tasks:
+    - name: Show dictionary values
+      ansible.builtin.debug:
+        msg:
+          - "User: {{ user_info.name }}"
+          - "Role: {{ user_info.role }}"
+          - "ID: {{ user_info.id }}"

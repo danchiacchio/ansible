@@ -1,0 +1,13 @@
+---
+- name: Show Ansible facts
+  hosts: all
+  gather_facts: true   # <-- this is what enables fact collection (default = true)
+
+  tasks:
+    - name: Display basic system info
+      debug:
+        msg: |
+          Hostname: {{ ansible_hostname }}
+          OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
+          Architecture: {{ ansible_architecture }}
+          IP Address: {{ ansible_default_ipv4.address }}

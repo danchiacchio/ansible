@@ -1,0 +1,36 @@
+---
+- name: Install HTTPD and change the default port
+  hosts: all
+  become: true
+
+  vars:
+    apache_pkg: httpd          # change to 'apache2' for Debian/Ubuntu
+    apache_ports_file: /etc/httpd/conf/httpd.conf
+
+  tasks:
+
+    - name: Install Apache
+      package:
+        name: "{{ apache_pkg }}"
+        state: present
+
+    - name: Change Apache port to 8080
+      lineinfile:
+        path: "{{ apache_ports_file }}"
+        regexp: '^Listen '
+        line: 'Listen 8080'
+      notify: Restart Apache
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: "{{ apache_pkg }}"
+        state: restarted
+      notify: Open Firewall Port
+
+    - name: Open Firewall Port
+      ansible.posix.firewalld:
+        port: 8080/tcp
+        permanent: true
+        immediate: true
+        state: enabled

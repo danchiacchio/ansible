@@ -1,0 +1,15 @@
+---
+- name: Exercise 4 - Integer math
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    a: 10
+    b: 4
+
+  tasks:
+    - name: Show addition and subtraction
+      ansible.builtin.debug:
+        msg:
+          - "a + b = {{ a + b }}"
+          - "a - b = {{ a - b }}"

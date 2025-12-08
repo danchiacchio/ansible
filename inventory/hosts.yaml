@@ -1,0 +1,13 @@
+managed_hosts:
+  hosts:
+    managed01:
+      ansible_host: 10.10.100.11
+    managed02:
+      ansible_host: 10.10.100.12
+    managed03:
+      ansible_host: 10.10.100.13
+    managed04:
+      ansible_host: 10.10.100.14
+
+  vars:
+    ansible_user: root

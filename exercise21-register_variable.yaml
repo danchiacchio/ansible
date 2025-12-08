@@ -1,0 +1,13 @@
+---
+- name: Exercise 21 - Register simple command output
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Run hostname command
+      ansible.builtin.command: hostname
+      register: my_host
+
+    - name: Show registered output
+      ansible.builtin.debug:
+        msg: "Hostname is: {{ my_host.stdout }}"

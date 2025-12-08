@@ -1,0 +1,27 @@
+---
+- name: Exercise 23 - Loop with register list
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    ip_list:
+      - 8.8.8.8
+      - 192.0.2.123
+
+  tasks:
+    - name: Ping each IP
+      ansible.builtin.command: "ping -c 1 {{ item }}"
+      register: ping_results
+      failed_when: false
+      loop: "{{ ip_list }}"
+      loop_control:
+        label: "{{ item }}"      # <-- CLEAN OUTPUT
+
+    - name: Show each ping result
+      ansible.builtin.debug:
+        msg: |
+          IP: {{ item.item }}
+          Success: {{ item.rc == 0 }}
+      loop: "{{ ping_results.results }}"
+      loop_control:
+        label: "{{ item.item }}"   # <-- CLEAN OUTPUT

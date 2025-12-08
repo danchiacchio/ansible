@@ -1,0 +1,20 @@
+---
+- name: Jinja2 Exercise 46 - Filters
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    hostname: web01
+    ports: [80, 443, 22]
+    name: "My Server"
+
+  tasks:
+    - name: Ensure output dir exists
+      ansible.builtin.file:
+        path: /tmp/jinja_exercises
+        state: directory
+
+    - name: Render filters template
+      ansible.builtin.template:
+        src: templates/filters.j2
+        dest: /tmp/jinja_exercises/ex4_output.txt

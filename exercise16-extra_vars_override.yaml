@@ -1,0 +1,12 @@
+---
+- name: Variable Precedence - Extra Vars
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    username: "value from playbook"
+
+  tasks:
+    - name: Show username
+      ansible.builtin.debug:
+        msg: "Username = {{ username }}"

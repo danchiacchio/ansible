@@ -1,0 +1,13 @@
+---
+- name: Exercise 2 - String concatenation
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    first: "Ansible"
+    second: "Rocks"
+
+  tasks:
+    - name: Show concatenated string
+      ansible.builtin.debug:
+        msg: "{{ first }} - {{ second }}"

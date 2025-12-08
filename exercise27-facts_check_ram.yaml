@@ -1,0 +1,14 @@
+---
+- name: Exercise 27 - Check RAM
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Report total memory
+      debug:
+        msg: "This server has {{ ansible_memtotal_mb }} MB of RAM"
+
+    - name: Warn if RAM is low
+      debug:
+        msg: "WARNING: Low RAM!"
+      when: ansible_memtotal_mb < 1024

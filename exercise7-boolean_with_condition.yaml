@@ -1,0 +1,13 @@
+---
+- name: Exercise 7 - Boolean variable
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    feature_enabled: false
+
+  tasks:
+    - name: Check boolean
+      ansible.builtin.debug:
+        msg: "Feature is enabled!"
+      when: feature_enabled

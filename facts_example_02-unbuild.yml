@@ -1,0 +1,39 @@
+---
+- name: Uninstall web server dynamically based on OS
+  hosts: all
+  gather_facts: true  # collect system info automatically
+
+  tasks:
+    - name: Show detected OS info
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          OS Family: {{ ansible_facts['os_family'] }}
+          Distribution: {{ ansible_facts['distribution'] }}
+          Version: {{ ansible_facts['distribution_version'] }}
+
+    - name: Uninstall Apache on RedHat-based systems
+      ansible.builtin.yum:
+        name: httpd
+        state: absent
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Uninstall Apache on Debian-based systems
+      ansible.builtin.apt:
+        name: apache2
+        state: absent
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Close HTTP port in firewall (RedHat-based)
+      ansible.builtin.firewalld:
+        service: http
+        permanent: yes
+        state: disabled
+        immediate: yes
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Close HTTP port in firewall (Debian-based)
+      ansible.builtin.command: ufw delete allow 80/tcp
+      when: ansible_facts['os_family'] == "Debian"
+      become: yes

@@ -1,0 +1,39 @@
+------------------------------------
+Hostname: managed01
+OS Family: RedHat
+Distro Name: RedHat
+Distro Version: 8.10
+Interface: ens192 - MTU: 1500
+IP Address: 10.10.100.11/24
+Default Gateway: 10.10.100.1
+------------------------------------
+
+------------------------------------
+Hostname: managed02
+OS Family: RedHat
+Distro Name: RedHat
+Distro Version: 8.10
+Interface: ens192 - MTU: 1500
+IP Address: 10.10.100.12/24
+Default Gateway: 10.10.100.1
+------------------------------------
+
+------------------------------------
+Hostname: managed03
+OS Family: RedHat
+Distro Name: CentOS
+Distro Version: 9
+Interface: ens192 - MTU: 1500
+IP Address: 10.10.100.13/24
+Default Gateway: 10.10.100.1
+------------------------------------
+
+------------------------------------
+Hostname: managed04
+OS Family: Debian
+Distro Name: Ubuntu
+Distro Version: 22.04
+Interface: ens160 - MTU: 1500
+IP Address: 10.10.100.14/24
+Default Gateway: 10.10.100.1
+------------------------------------

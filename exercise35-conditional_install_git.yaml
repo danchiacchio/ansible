@@ -1,0 +1,16 @@
+---
+- name: Exercise 35 - Install Git only if not installed
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Check if git is installed
+      command: rpm -q git
+      register: git_check
+      ignore_errors: true
+
+    - name: Install git
+      package:
+        name: git
+        state: present
+      when: git_check.rc != 0

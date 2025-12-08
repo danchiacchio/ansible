@@ -1,0 +1,13 @@
+---
+- name: Exercise 9 - Null variable (undefined)
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    value_is_null: null
+
+  tasks:
+    - name: Show if value is null
+      ansible.builtin.debug:
+        msg: "Variable is NULL"
+      when: value_is_null is none

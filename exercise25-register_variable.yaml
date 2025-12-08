@@ -1,0 +1,20 @@
+---
+- name: Exercise 25 - Register + conditional execution
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Try to ping Google
+      ansible.builtin.command: ping -c 1 8.8.8.88
+      register: ping_test
+      ignore_errors: true
+
+    - name: Run only when ping was successful
+      ansible.builtin.debug:
+        msg: "Internet is reachable!"
+      when: ping_test.rc == 0
+
+    - name: Run only when ping failed
+      ansible.builtin.debug:
+        msg: "Internet is NOT reachable!"
+      when: ping_test.rc != 0

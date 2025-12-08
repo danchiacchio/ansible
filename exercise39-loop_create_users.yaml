@@ -1,0 +1,17 @@
+---
+- name: Exercise 39 - Create multiple users
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Create users
+      user:
+        name: "{{ item }}"
+        groups: wheel
+        state: present
+      with_items:
+        - alice
+        - bob
+        - charlie
+        - trump
+        - bush

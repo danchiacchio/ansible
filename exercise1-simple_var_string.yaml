@@ -1,0 +1,12 @@
+---
+- name: Exercise 1 - String variable
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    my_string: "Hello from Ansible!"
+
+  tasks:
+    - name: Show string
+      ansible.builtin.debug:
+        msg: "The value of my_string is: {{ my_string }}"

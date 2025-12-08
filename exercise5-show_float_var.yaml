@@ -1,0 +1,12 @@
+---
+- name: Exercise 5 - Float variable
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    pi_value: 3.14159
+
+  tasks:
+    - name: Print float
+      ansible.builtin.debug:
+        msg: "Pi value is {{ pi_value }}"

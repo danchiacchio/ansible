@@ -1,0 +1,14 @@
+---
+- name: Exercise 22 - Check if file exists
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Check /etc/passwd
+      ansible.builtin.command: ls /etc/passwd
+      register: file_check
+      failed_when: false
+
+    - name: Interpret result
+      ansible.builtin.debug:
+        msg: "File exists: {{ file_check.rc == 0 }}"

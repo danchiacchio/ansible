@@ -1,0 +1,33 @@
+---
+- name: Exercise 40 — Check Services Status Safely
+  hosts: all
+  gather_facts: false
+  become: false
+
+  vars:
+    services_to_check:
+      - slurmd
+      - sshd
+      - chronyd
+      - mysql
+      - httpd
+
+  tasks:
+    - name: Check if service exists
+      command: systemctl status {{ item }}
+      register: service_check
+      failed_when: false
+      changed_when: false
+      loop: "{{ services_to_check }}"
+      loop_control:
+        label: "{{ item }}"
+
+    - name: Print service status result
+      debug:
+        msg: |
+          Service: {{ item.item }}
+          Installed: {{ 'yes' if item.rc == 0 or 'Loaded:' in item.stderr else 'no' }}
+          Active: {{ 'yes' if 'Active: active' in item.stdout else 'no' }}
+      loop: "{{ service_check.results }}"
+      loop_control:
+        label: "{{ item.item }}"

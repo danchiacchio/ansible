@@ -1,0 +1,17 @@
+---
+- name: Exercise 37 - Install multiple packages
+  hosts: all
+  become: yes
+
+  vars:
+    my_packages:
+      - tree
+      - vim
+      - wget
+
+  tasks:
+    - name: Install packages
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ my_packages }}"

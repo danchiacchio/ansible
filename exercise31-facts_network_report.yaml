@@ -1,0 +1,51 @@
+---
+- name: Network Inventory for All Hosts
+  hosts: all
+  gather_facts: true
+
+  vars:
+    log_dir: "/root/ansible/logs"
+    log_file: "network_inv_all_hosts.log"
+
+  tasks:
+    - name: Ensure local log directory exists
+      ansible.builtin.file:
+        path: "{{ log_dir }}"
+        state: directory
+        mode: '0755'
+      delegate_to: localhost
+      run_once: true
+
+    - name: Build report for each host
+      ansible.builtin.set_fact:
+        host_report: |
+          ------------------------------------
+          Hostname: {{ inventory_hostname }}
+          OS Family: {{ ansible_os_family }}
+          Distro Name: {{ ansible_distribution }}
+          Distro Version: {{ ansible_distribution_version }}
+          Interface: {{ ansible_default_ipv4.interface }} - MTU: {{ ansible_default_ipv4.mtu }}
+          IP Address: {{ ansible_default_ipv4.address }}/{{ ansible_default_ipv4.prefix }}
+          Default Gateway: {{ ansible_default_ipv4.gateway }}
+          ------------------------------------
+
+    - name: Collect all host reports into a single list
+      ansible.builtin.set_fact:
+        combined_reports: "{{ combined_reports | default([]) + [hostvars[item].host_report] }}"
+      loop: "{{ ansible_play_hosts }}"
+      run_once: true
+
+    - name: Write final multi-host report to a single file (local)
+      ansible.builtin.copy:
+        dest: "{{ log_dir }}/{{ log_file }}"
+        content: "{{ combined_reports | join('\n') }}"
+        mode: '0644'
+      delegate_to: localhost
+      run_once: true
+
+    - name: Show where file is stored
+      ansible.builtin.debug:
+        msg: "Report saved to {{ log_dir }}/{{ log_file }}"
+      delegate_to: localhost
+      run_once: true
+

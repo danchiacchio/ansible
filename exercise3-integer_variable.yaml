@@ -1,0 +1,12 @@
+---
+- name: Exercise 3 - Integer variable
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    num_retries: 5
+
+  tasks:
+    - name: Show integer
+      ansible.builtin.debug:
+        msg: "Number of retries: {{ num_retries }}"

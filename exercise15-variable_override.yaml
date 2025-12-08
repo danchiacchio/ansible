@@ -1,0 +1,12 @@
+---
+- name: Variable Precedence - Playbook vs Inventory
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    message: "Hello from playbook"
+
+  tasks:
+    - name: Show final message value
+      ansible.builtin.debug:
+        msg: "Message = {{ message }}"

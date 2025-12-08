@@ -1,0 +1,16 @@
+---
+- name: Exercise 11 - List loop
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    colors:
+      - red
+      - green
+      - blue
+
+  tasks:
+    - name: Print each color
+      ansible.builtin.debug:
+        msg: "Color: {{ item }}"
+      loop: "{{ colors }}"

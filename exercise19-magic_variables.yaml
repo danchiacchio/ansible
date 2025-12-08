@@ -1,0 +1,13 @@
+---
+- name: Magic Variables - play_hosts and groups
+  hosts: web
+  gather_facts: false
+
+  tasks:
+    - name: Show hosts in this play
+      ansible.builtin.debug:
+        msg: "Play hosts: {{ play_hosts }}"
+
+    - name: Show all DB hosts from groups
+      ansible.builtin.debug:
+        msg: "DB hosts: {{ groups['db'] }}"

@@ -1,0 +1,4 @@
+Hostname uppercase: {{ hostname | upper }}
+CSV list: {{ ports | join(', ') }}
+Sanitized name: {{ name | replace(' ', '_') }}
+Using default: {{ missing_value | default('not provided') }}

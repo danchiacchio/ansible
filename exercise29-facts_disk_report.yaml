@@ -1,0 +1,17 @@
+---
+- name: Exercise 29 - Disk Facts
+  hosts: all
+  gather_facts: yes
+  collections:
+    - ansible.utils     # <— REQUIRED to load the human_readable filter
+
+  tasks:
+    - name: Extract root mount information
+      set_fact:
+        root_mount: "{{ ansible_facts.mounts | selectattr('mount', 'equalto', '/') | first }}"
+
+    - name: Show root filesystem info (human readable)
+      debug:
+        msg: |
+          FS Size: {{ root_mount.size_total | human_readable }}
+          FS Available: {{ root_mount.size_available | human_readable }}

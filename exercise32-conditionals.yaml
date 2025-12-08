@@ -1,0 +1,15 @@
+---
+- name: Exercise 32 - Check OS family
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Print message only on Red Hat systems
+      debug:
+        msg: "This is a RedHat-based system!"
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Print message only on Debian systems
+      debug:
+        msg: "This is a Debian-based system!"
+      when: ansible_facts['os_family'] == "Debian"

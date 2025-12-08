@@ -1,0 +1,45 @@
+---
+- name: Install web server dynamically based on OS
+  hosts: all
+  gather_facts: true  # collect system info automatically
+
+  tasks:
+    - name: Show detected OS info
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          OS Family: {{ ansible_facts['os_family'] }}
+          Distribution: {{ ansible_facts['distribution'] }}
+          Version: {{ ansible_facts['distribution_version'] }}
+
+    - name: Install Apache on RedHat-based systems
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Install Apache on Debian-based systems
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Ensure web service is running
+      ansible.builtin.service:
+        name: "{{ 'httpd' if ansible_facts['os_family'] == 'RedHat' else 'apache2' }}"
+        state: started
+        enabled: true
+
+    - name: Open HTTP port in firewall (RedHat-based)
+      ansible.builtin.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Open HTTP port in firewall (Debian-based)
+      ansible.builtin.command: ufw allow 80/tcp
+      when: ansible_facts['os_family'] == "Debian"
+      become: yes

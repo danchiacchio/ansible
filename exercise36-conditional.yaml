@@ -1,0 +1,10 @@
+---
+- name: Exercise 36 - Run only on certain hosts
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Print message only on host managed03
+      debug:
+        msg: "This task runs ONLY on managed03"
+      when: inventory_hostname == "managed03"

@@ -1,0 +1,15 @@
+---
+- name: Exercise 33 - Check if user exists
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Check for user 'thor'
+      command: id thor
+      register: user_check
+      ignore_errors: true
+
+    - name: Show message if user exists
+      debug:
+        msg: "User 'thor' exists!"
+      when: user_check.rc == 0
