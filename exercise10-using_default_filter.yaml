@@ -13,4 +13,4 @@
 
     - name: Show default filter result (correct behavior for null)
       ansible.builtin.debug:
-        msg: "Value: {{ my_value | default('DEFAULT VALUE', true) }}"
+        msg: "Value: {{ my_value | default('test', true) }}"

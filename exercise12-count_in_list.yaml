@@ -9,6 +9,9 @@
       - web02
       - db01
       - cache01
+      - web03
+      - web04
+      - db02
 
   tasks:
     - name: Show length

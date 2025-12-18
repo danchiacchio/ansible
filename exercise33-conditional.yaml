@@ -8,6 +8,7 @@
       command: id thor
       register: user_check
       ignore_errors: true
+      changed_when: false
 
     - name: Show message if user exists
       debug:

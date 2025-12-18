@@ -6,7 +6,8 @@
   vars:
     ip_list:
       - 8.8.8.8
-      - 192.0.2.123
+      - 192.0.2.122
+      - 1.1.1.1
 
   tasks:
     - name: Ping each IP
@@ -25,3 +26,7 @@
       loop: "{{ ping_results.results }}"
       loop_control:
         label: "{{ item.item }}"   # <-- CLEAN OUTPUT
+
+    - name: Display ping_results
+      ansible.builtin.debug:
+        msg: "{{ ping_results }}"

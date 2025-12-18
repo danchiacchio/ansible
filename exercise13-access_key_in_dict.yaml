@@ -8,6 +8,7 @@
       name: "Thor"
       role: "IT Admin"
       id: 101
+      gid: 1001
 
   tasks:
     - name: Show dictionary values
@@ -16,3 +17,4 @@
           - "User: {{ user_info.name }}"
           - "Role: {{ user_info.role }}"
           - "ID: {{ user_info.id }}"
+          - "GID: {{ user_info.gid }}"

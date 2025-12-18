@@ -8,6 +8,8 @@
       ssh: 22
       http: 80
       https: 443
+      custom: 7894
+      custom2: 12530
 
   tasks:
     - name: Show each key and value

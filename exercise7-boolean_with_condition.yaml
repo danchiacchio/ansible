@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-    feature_enabled: false
+    feature_enabled: true
 
   tasks:
     - name: Check boolean

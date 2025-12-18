@@ -8,6 +8,9 @@
       - tree
       - vim
       - wget
+      - git
+      - httpd
+      - apache2
 
   tasks:
     - name: Install packages

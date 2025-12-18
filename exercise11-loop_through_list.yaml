@@ -8,6 +8,8 @@
       - red
       - green
       - blue
+      - pink
+      - white
 
   tasks:
     - name: Print each color
